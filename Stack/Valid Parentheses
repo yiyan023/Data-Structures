@@ -1,0 +1,16 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        p = {")" : "(", "}" : "{", "]" : "["}
+        l = []
+        
+        for c in s:
+            if c in p:
+                if l and l[-1] == p[c]:
+                    l.pop()
+                else:
+                    return False
+                
+            else:
+                l.append(c)
+        
+        return len(l) == 0
