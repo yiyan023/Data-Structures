@@ -1,0 +1,14 @@
+class Solution(object):
+    def majorityElement(self, nums):
+        tally = {}
+        result, value = 0, 0
+
+        for n in nums:
+            tally[n] = tally.get(n, 0) + 1
+
+            if tally[n] > value:
+                result = n
+                value = tally[n]
+
+        return result
+        
