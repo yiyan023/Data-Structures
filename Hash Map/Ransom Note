@@ -1,0 +1,18 @@
+class Solution(object):
+    def canConstruct(self, ransomNote, magazine):
+        magazineHash = {}
+
+        for c in magazine:
+            if c in magazineHash:
+                magazineHash[c] += 1
+            else:
+                magazineHash[c] = 1
+        
+        for c in ransomNote:
+            if c in magazineHash and magazineHash[c] > 0:
+                magazineHash[c] -= 1
+            else:
+                return False 
+
+        return True
+        
