@@ -1,0 +1,14 @@
+class Solution(object):
+    def isBalanced(self, root):
+        def height(root):
+            if not root:
+                return 0
+            left, right = height(root.left), height(root.right)
+            if abs(height(root.right) - height(root.left)) > 1:
+                return -1 # means that it is unbalanced
+            elif left == -1 or right == -1:
+                return -1
+            else:
+                return 1 + max(left, right)
+
+        return height(root) >= 0
