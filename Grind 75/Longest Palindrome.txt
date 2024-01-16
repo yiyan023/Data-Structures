@@ -1,0 +1,23 @@
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        hash = {}
+        oddCount = 0
+
+        for char in s:
+            # add everything to the hash map
+            if char in hash:
+                hash[char] += 1
+            else:
+                hash[char] = 1
+            
+            #updating the number of odd letters
+            if hash[char] % 2 == 1:
+                oddCount += 1
+            else: 
+                oddCount -= 1 #the even cancels it out, so it becomes 0
+        
+        if oddCount > 1:
+            return len(s) - oddCount + 1 #only one odd letter can be put (in the middle)
+        return len(s) #everything is even, return the whoel string length
+                
+        
