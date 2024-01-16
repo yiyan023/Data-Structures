@@ -1,0 +1,17 @@
+class Solution:
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        magazineHash = {}
+
+        for c in magazine:
+            if c not in magazineHash:
+                magazineHash[c] = 1
+            else: 
+                magazineHash[c] += 1
+        
+        for char in ransomNote:
+            if char in magazineHash and magazineHash[char] > 0:
+                magazineHash[char] -= 1
+            else:
+                return False
+        
+        return True
