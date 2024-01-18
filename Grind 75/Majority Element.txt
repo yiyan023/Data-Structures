@@ -1,0 +1,16 @@
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        dict = {}
+        Max, Majority = 0, 0
+
+        for num in nums:
+            if num in dict:
+                dict[num] += 1
+            if num not in dict:
+                dict[num] = 1
+            if dict[num] > Majority: 
+                Majority = dict[num]
+                Max = num
+
+        return Max
+        
