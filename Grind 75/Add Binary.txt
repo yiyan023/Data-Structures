@@ -1,0 +1,24 @@
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        maxLength = max(len(a), (len(b)))
+        i = maxLength - 1
+        carryOver = 0
+        sum = []
+
+        a = a.zfill(maxLength)
+        b = b.zfill(maxLength)
+
+        while i > -1:
+            digitSum = int(a[i]) + int(b[i]) + carryOver
+
+            if digitSum > 1:
+                sum.append(digitSum-2)
+                carryOver = 1
+            else:
+                sum.append(digitSum)
+                carryOver = 0
+            i -= 1
+
+        if carryOver == 1: sum.append(carryOver) 
+
+        return "".join(str(x) for x in sum[::-1])
