@@ -1,0 +1,11 @@
+class Solution(object):
+    def maxDepth(self, root):
+        def height(root):
+            if not root:
+                return 0
+
+            left, right = height(root.left), height(root.right)
+            return 1 + max(left, right)
+        
+        return height(root)
+        
