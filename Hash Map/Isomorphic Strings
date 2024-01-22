@@ -1,0 +1,27 @@
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        hash1 = {}
+        hash2 = {}
+        
+        if len(s) != len(t):
+            return False
+        
+        for c1, c2 in zip(s, t): #zip allows us to traverse two things simultaneously
+            if c1 in hash1:
+                if hash1[c1] != c2: #the character, not the index
+                    return False 
+            
+            else:
+                hash1[c1] = c2 #set the character in s equal to the character in t
+
+            if c2 in hash2:
+                if hash2[c2] != c1:
+                    return False
+            
+            else:
+                hash2[c2] = c1 #do the opposite
+        
+        return True #we have to create two dictionaries because if we only put one, it will just assign one character to another, so it will not check if there are inconsistencies 
+        
+        
+        
