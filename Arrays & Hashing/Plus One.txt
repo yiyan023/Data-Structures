@@ -1,0 +1,21 @@
+class Solution:
+    def plusOne(self, digits: List[int]) -> List[int]:
+        reverseDigits = digits[::-1]
+        sum = []
+        carryOver = 1
+
+        for i in range(len(reverseDigits)):
+            if reverseDigits[i] + carryOver > 9:
+                sum.append(reverseDigits[i] + carryOver - 10)
+                carryOver = 1
+            else:
+                sum.append(reverseDigits[i] + carryOver)
+                carryOver = 0
+        
+        if carryOver == 1:
+            sum.append(carryOver)
+        
+        return sum[::-1]
+                
+
+        
