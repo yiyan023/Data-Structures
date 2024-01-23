@@ -1,0 +1,20 @@
+class Solution(object):
+    def removeDuplicates(self, nums):
+        k = 0
+        hash = {}
+
+        for i in range(len(nums)):
+            if nums[i] not in hash:
+                hash[nums[i]] = 1
+                nums[k] = nums[i] #just remember that you have to replace the numbers in the array too
+                k += 1
+            elif hash[nums[i]] < 2:
+                hash[nums[i]] += 1
+                nums[k] = nums[i]
+                k += 1
+            else:
+                hash[nums[i]] += 1
+        
+        return k
+
+        
