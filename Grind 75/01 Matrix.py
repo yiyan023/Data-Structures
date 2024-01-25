@@ -1,21 +1,24 @@
 class Solution(object):
     def updateMatrix(self, matrix):
         from collections import deque
-        q = deque()
+        queue = deque()
+
         for i in range(len(matrix)):
             for j in range(len(matrix[0])):
                 if matrix[i][j] == 0:
-                    q.append((i, j))
+                    queue.append((i, j))
                 else:
                     matrix[i][j] = float('inf')
+        
+        directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
 
-        while q:
-            x, y = q.popleft() #takes the coordinates from the first thing popped
-            for h, v in [(1, 0), (-1, 0), (0, 1), (0, -1)]: #these are the different directions
-                newX, newY = x+h, y+v
-                if 0<= newX < len(matrix) and 0<= newY< len(matrix[0]) : #bounds
+        while queue:
+            x, y = queue.popleft()
+            for dx, dy in directions: #these are the different directions
+                newX, newY = x + dx, y + dy
+                if 0<= newX < len(matrix) and 0<= newY< len(matrix[0]) :
                     if matrix[newX][newY] > matrix[x][y] + 1:
                         matrix[newX][newY] = matrix[x][y] + 1
-                        q.append((newX, newY))
-                
+                        queue.append((newX, newY))
+            
         return matrix
