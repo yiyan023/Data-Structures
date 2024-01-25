@@ -1,0 +1,32 @@
+class Solution(object):
+    def summaryRanges(self, nums):
+        if len(nums) == 0:
+            return nums
+
+        num = nums[0]
+        i = 0
+        result = []
+
+        for j in range(len(nums)):
+            
+            if nums[j] - num > 1:
+                if nums[i] == num:
+                    result.append(str(num))
+                    
+                else:
+                    result.append(str(nums[i]) + "->" + str(num))
+                i = j
+                num = nums[j]
+
+            if j == len(nums) - 1:
+                if nums[i] == nums[j]:
+                    result.append(str(nums[i]))
+                else:
+                    result.append(str(nums[i]) + "->" + str(nums[j]))
+
+            else:
+                num = nums[j]
+        
+        return result
+
+        
