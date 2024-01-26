@@ -1,0 +1,14 @@
+class Solution(object):
+    def twoSum(self, numbers, target):
+        hash = {}
+
+        for i, num in enumerate(numbers):
+            complement = target - num
+            
+            if complement in hash:
+                return [hash[complement], i+1]
+            else:
+                hash[num] = i+1
+        
+        return []
+        
