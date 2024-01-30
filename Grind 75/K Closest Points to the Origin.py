@@ -1,7 +1,8 @@
-class Solution:
-    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
-        import heapq
+import heapq
 
+class Solution:
+    def kClosest(self, points, k):
+        
         minHeap = []
 
         for x, y in points:
