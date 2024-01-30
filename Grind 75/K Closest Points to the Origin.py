@@ -2,7 +2,6 @@ import heapq
 
 class Solution:
     def kClosest(self, points, k):
-        
         minHeap = []
 
         for x, y in points:
