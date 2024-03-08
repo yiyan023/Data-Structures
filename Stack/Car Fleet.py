@@ -1,5 +1,5 @@
 class Solution:
-    def carFleet(self, target: int, position):
+    def carFleet(self, target, position, speed):
         combined = []
 
         for i in range(len(position)):
