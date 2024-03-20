@@ -1,4 +1,5 @@
-import defaultdict from collections
+from collections import defaultdict
+
 class Solution(object):
     def findJudge(self, n, trust):
         trusts = defaultdict(int)
