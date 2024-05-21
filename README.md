@@ -45,11 +45,11 @@ Hey there 👋! This repository is dedicated for building my knowledge of data s
 - process of continually updating stored values
 
 ## Data Structures: 
-- **Hash map: **stores data in key-value pairs
-- **Stack: **stores data with first in, last out order
+- **Hash map:** stores data in key-value pairs
+- **Stack:** stores data with first in, last out order
 - **Queue:** stores data with first in, first out order
 - **Heap:** BST that satisfies the heap property — the children of a tree is always less than / greater than the node (root is either greatest or smallest in a tree)
-- ** Graph:** abstract data type that can be used to represent complex, non-linear relationships between objects
+- **Graph:** abstract data type that can be used to represent complex, non-linear relationships between objects
 - **Trees:** sorted tree where left children are always less than the root and the right children are always greater than the root, primarily deal with Binary Search Trees (BSTs)
 - **Tries:** a trie is a tree data structure used to store strings over the alphabet
 - **Linked Lists:** a sequence of nodes, which contains a data value & a link or pointer to the next node
