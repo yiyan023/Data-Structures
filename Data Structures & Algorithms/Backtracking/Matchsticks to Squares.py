@@ -1,5 +1,5 @@
 class Solution:
-    def makesquare(self, matchsticks: List[int]) -> bool:
+    def makesquare(self, matchsticks) -> bool:
         length = sum(matchsticks) // 4
         sides = [0] * 4
 
