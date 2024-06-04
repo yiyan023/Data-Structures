@@ -1,0 +1,16 @@
+class Solution:
+    def restoreString(self, s: str, indices: List[int]) -> str:
+        arr = []
+        result = ""
+        
+        for i in range(len(s)):
+            arr.append([indices[i], s[i]])
+            
+        arr.sort()
+        
+        while arr:
+            i, letter = arr.pop(0)
+            result += letter
+        
+        return result
+    
