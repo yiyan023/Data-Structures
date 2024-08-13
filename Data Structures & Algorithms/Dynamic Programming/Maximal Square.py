@@ -7,7 +7,7 @@ class Solution:
         for r in range(row - 1, -1, -1):
             for c in range(col - 1, -1, -1):
                 if matrix[r][c] == "1":
-                    dp[r][c] = max(dp[r][c], 1+ min(dp[r+1][c], dp[r][c+1], dp[r+1][c+1]))
+                    dp[r][c] = 1+ min(dp[r+1][c], dp[r][c+1], dp[r+1][c+1])
                     maxVal = max(maxVal, dp[r][c])
         
         return maxVal ** 2
