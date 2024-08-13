@@ -8,16 +8,16 @@ class Solution:
         dp = set()
         dp.add(0)
 
-        for i in range(len(nums)-1,-1,-1):
+        for n in nums:
             nextDp= set()
 
             for v in dp:
-                if nums[i] + v == arrSum:
+                if n + v == arrSum:
                     return True 
                 
                 # otherwise, add this number to the set, along with its sum with the current values in dp 
                 nextDp.add(v)
-                nextDp.add(nums[i]+v)
+                nextDp.add(n+v)
             
             dp = nextDp
 
