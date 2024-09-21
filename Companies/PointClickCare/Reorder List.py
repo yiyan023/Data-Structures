@@ -5,7 +5,7 @@
 #         self.next = next
 class Solution:
     def reorderList(self, head: Optional[ListNode]) -> None:
-        fast, slow = head.next, head
+        fast, slow = head, head
 
         while fast and fast.next:
             slow = slow.next 
@@ -15,7 +15,6 @@ class Solution:
         new_head = slow.next = None 
 
         while cur:
-            print(cur)
             temp = cur.next
             cur.next = new_head
             new_head = cur
