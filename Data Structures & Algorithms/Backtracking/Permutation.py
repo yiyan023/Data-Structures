@@ -1,18 +1,18 @@
-class Solution(object):
-    def permute(self, nums):
-        result = []
-        
-        if len(nums) == 1:
-            return [nums[:]]
-        
-        for i in range(len(nums)):
-            cur = nums.pop(0)
-            perms = self.permute(nums)
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        picked = [False] * len(nums)
 
-            for perm in perms:
-                perm.append(cur)
-            result.extend(perms)
-            nums.append(cur)
-        
-        return result
-                
+        def dfs(idx, arr, picked):
+            if len(arr) == len(nums):
+                res.append(arr)
+                return 
+            
+            for i in range(len(nums)):
+                if not picked[i]:
+                    picked[i] = True 
+                    dfs(i+1, arr + [nums[i]], picked)
+                    picked[i] = False
+
+        dfs(0, [], picked)
+        return res
