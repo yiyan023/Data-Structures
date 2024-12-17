@@ -1,24 +1,16 @@
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:
-        arrSum = sum(nums) // 2
-
-        if sum(nums) % 2:
-            return False 
-        
-        dp = set()
-        dp.add(0)
-
-        for n in nums:
-            nextDp= set()
-
-            for v in dp:
-                if n + v == arrSum:
-                    return True 
+        total_sum = sum(nums)
+        if total_sum % 2 != 0:
+            return False
+       
+        target_sum = total_sum // 2
+        dp = [False] * (target_sum + 1)
+        dp[0] = True
+       
+        for num in nums:
+            for current_sum in range(target_sum, num - 1, -1):
+                if dp[current_sum - num]:
+                    dp[current_sum] = True
                 
-                # otherwise, add this number to the set, along with its sum with the current values in dp 
-                nextDp.add(v)
-                nextDp.add(n+v)
-            
-            dp = nextDp
-
-        return False
+        return dp[target_sum]
