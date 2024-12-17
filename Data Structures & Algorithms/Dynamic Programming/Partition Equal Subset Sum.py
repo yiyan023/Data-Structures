@@ -9,8 +9,8 @@ class Solution:
         dp[0] = True
        
         for num in nums:
-            for current_sum in range(target_sum, num - 1, -1):
-                if dp[current_sum - num]:
-                    dp[current_sum] = True
+            for curr_sum in range(target_sum, num - 1, -1):
+                if dp[curr_sum - num]:
+                    dp[curr_sum] = True
                 
-        return dp[target_sum]
+        return dp[-1]
