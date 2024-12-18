@@ -7,11 +7,10 @@ class Solution:
             return r >= 0 and c >=0 and r < len(grid) and c < len(grid[0])
 
         def dfs(r, c, prev, char):
-            if (r,c) in seen:
+            if (r,c) in visited:
                 return True
 
             visited.add((r, c))
-            seen.add((r, c))
 
             for dr, dc in directions:
                 new_r, new_c = r + dr, c + dc
@@ -25,8 +24,6 @@ class Solution:
         for r in range(len(grid)):
             for c in range(len(grid[0])):
                 if (r,c) not in visited:
-                    seen = set()
-
                     if dfs(r, c, None, grid[r][c]):
                         return True
         
