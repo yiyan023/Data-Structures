@@ -5,25 +5,21 @@
 #         self.next = next
 class Solution:
     def rotateRight(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
-        slow, fast = head, head 
-        list_len = 0
+        cur, length = head, 0
+        new_idx = {}
 
-        while fast:
-            list_len += 1
-            slow = fast
-            fast = fast.next
-        
-        # if list is empty or length 1, k modulo is 0, return current result 
-        if list_len <= 1 or not k % list_len: return head
-        
-        rotations = (list_len - 1 - k % list_len)
-        dummy = head
+        while cur: 
+            new_idx[length] = cur.val # store the old index 
+            length += 1
+            cur = cur.next 
 
-        while rotations:
-            rotations -= 1
-            dummy = dummy.next 
+        idx = 0
+        cur = head 
+
+        while cur:
+            prev_index = (idx - k) % length # calculate the new one with reverse engineering 
+            cur.val = new_idx[prev_index]
+            idx += 1
+            cur = cur.next
         
-        temp = dummy.next
-        dummy.next = None 
-        slow.next = head 
-        return temp
+        return head
