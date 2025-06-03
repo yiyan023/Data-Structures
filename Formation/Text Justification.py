@@ -12,8 +12,8 @@ def full_justify(words, maxWidth):
         
         else:
             line = cur_line[0]
-            spaces = (maxWidth // cur_len)
-            remainder = (maxWidth % cur_len)
+            spaces = ((maxWidth - cur_len) // (len(cur_line) - 1))
+            remainder = ((maxWidth - cur_len) % (len(cur_line) - 1))
 
             for j in range(1, len(cur_line)):
                 word = " " * (spaces + 2 if remainder > 0 else spaces + 1) + cur_line[j]
