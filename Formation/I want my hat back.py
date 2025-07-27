@@ -1,40 +1,35 @@
-# 1. loops are possible? 
-# 2. no dogs in dog park possible?
-# 3. are all the names unique? 
-# 4. invalid inputs? 
-# 5. is it guaranteed that all dogs in the dog park will be keys in the dogs hash? 
-# 6. is it guaranteed that one of the dogs will see the hat, and it will be stored as "HAT" in all caps? 
-# 7. case sensitivity? 
+from collections import deque 
 
-# test cases 
-# loops inside (between different dogs)
-# a direct chain 
+def findHat(dogs: dict, bestFriend: str):
+    seen = set()
+    seen.add(bestFriend)
 
-# using a queue to process which dogs we want to ask 
-# good way to process level by level to make sure we aren't missing dogs that could have seen the hat 
-# also making sure to create a visited set so we don't go in cycles 
-# time complexity: O(n)
-# space complexity: O(n)
+    queue = deque()
+    queue.append(bestFriend)
 
-import collections
+    while queue:
+        dog = queue.popleft()
 
-def findHat(dogs: dict, bestFriend: str) -> str:
-    queue = collections.deque([bestFriend])
-    visited = set()
-
-    while queue: 
-        cur = queue.popleft()
-        visited.add(cur)
-
-        for nei in dogs[cur]:
-            if nei == "HAT":
-                return cur 
+        for neigh in dogs[dog]:
+            if neigh == "HAT":
+                return dog
             
-            elif nei not in visited:
-                queue.append(nei)
+            elif neigh not in seen:
+                seen.add(neigh)
+                queue.append(neigh)
     
     return "Couldn't find the hat"
-            
+
+dogs = {
+  'Carter': ['Fido', 'Ivy'],
+  'Ivy': ["HAT"], # Ivy has seen the hat
+  'Loki': ['Snoopy'],
+  'Pepper': ['Carter'],
+  'Snoopy': ['Pepper'],
+  'Fido': []
+}
+print(findHat(dogs, 'Loki') == 'Ivy')
+
 dogs = {
     'Carter': ['Fido', 'Ivy'],
     'Ivy': ["HAT"], # Ivy has seen the hat
