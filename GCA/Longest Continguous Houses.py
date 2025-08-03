@@ -1,51 +1,26 @@
-# what happens when you add a house?
-# you are either connecting "islands" or creating a solo 
-
-# when you add a block, check its neighbours 
-# if the neighbours exists (aka it has already been built), find the length of the neighbour, sum them + 1 and compare with the max length. 
-# the max length will be equal to the max length of the previous query to the length of this addition 
-
-# approach:
-# each block will be associated to an island name or identifier 
-#   when islands merge, this will be updated 
-# each island name is associated with a 
+import bisect
 
 def solution(houses: list):
     intervals = []
     res = [0] * len(houses)
     
     def insert_interval(val: int):
-        l, r = 0, len(intervals) - 1
+        idx = bisect.bisect_left(intervals, [val, val])
+        intervals.insert(idx, [val, val])
 
-        while l <= r:
-            mid = (l + r ) // 2
+        if idx + 1 < len(intervals) and intervals[idx+1][0] - 1 == intervals[idx][1]:
+            intervals[idx][1] = max(intervals[idx][1], intervals[idx+1][1])
+            intervals.pop(idx+1)
 
-            if intervals[mid][0] - 1 <= val <= intervals[mid][1] + 1:
-                intervals[mid][0] = min(intervals[mid][0], val)
-                intervals[mid][1] = max(intervals[mid][1], val)
-
-                if mid - 1 >= 0 and intervals[mid-1][1] == intervals[mid][0] - 1:
-                    intervals[mid][0] = intervals[mid-1][0]
-                    intervals.pop(mid - 1)
-                    
-                if mid + 1 < len(intervals) and intervals[mid+1][0] == intervals[mid][1] + 1:
-                    intervals[mid][1] = intervals[mid+1][1]
-                    intervals.pop(mid + 1)
-                
-                return intervals[mid][1] - intervals[mid][0] + 1
-            
-            elif val < intervals[mid][0]:
-                r = mid - 1
-            
-            else:
-                l = mid + 1
-    
-        intervals.insert(l, [val, val])
-        return 1
+        if idx - 1 >= 0 and intervals[idx-1][1] + 1 == intervals[idx][0]:
+            intervals[idx][0] = min(intervals[idx][0], intervals[idx-1][0])
+            intervals.pop(idx-1)
+            return intervals[idx-1][1] - intervals[idx-1][0] + 1
+        
+        return intervals[idx][1] - intervals[idx][0] + 1
 
     for i, house in enumerate(houses):
         length = insert_interval(house)
-        print(intervals)
         res[i] = length if i - 1 < 0 else max(length, res[i - 1])
     
     return res
@@ -107,8 +82,9 @@ def run_tests(solution):
 
     for i, test in enumerate(tests):
         result = solution(test["queries"])
-        assert result == test["expected"], f"Test {i+1} failed: expected {test['expected']}, got {result}"
-        print(f"Test {i+1} passed.")
+        assert(result == test["expected"])
+    
+    print("Ok.")
 
 # Example usage:
 run_tests(solution)
